@@ -210,116 +210,33 @@
   .cell.future .num { color: var(--ink-quiet); opacity: 0.55; }
 
   .cell.today {
-    box-shadow: inset 0 0 0 1px var(--ink-quiet);
+    background: rgba(41, 41, 39, 0.09);
   }
 
-  .cell .xmark {
+  .cell .marks {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
   }
-  .cell .xmark .core {
-    fill: none;
-    stroke: var(--mark);
-    stroke-linecap: round;
-    opacity: 0.9;
+  .cell .marks .stroke {
+    transform-box: fill-box;
+    transform-origin: top center;
   }
-  .cell .xmark .blot {
+  .cell .marks .stroke circle,
+  .cell .marks .stroke path {
     fill: var(--mark);
-    opacity: 0.34;
   }
-  .cell .xmark path.animate {
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-    animation: drawstroke 0.4s ease-out forwards;
-  }
-  .cell .xmark circle.animate {
-    opacity: 0;
-    animation: blotIn 0.16s ease-out forwards;
-  }
-  .cell .xmark .second {
-    animation-delay: 0.36s;
+  .cell .marks .stroke.animate {
+    animation: growDown 0.9s cubic-bezier(0.25, 0.85, 0.2, 1) forwards;
   }
 
-  @keyframes drawstroke {
-    to { stroke-dashoffset: 0; }
-  }
-  @keyframes blotIn {
-    to { opacity: 0.38; }
+  @keyframes growDown {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
   }
 
   .cell:not(.out):not(.future) { cursor: default; }
-
-  /* ============ DURATION SCREEN ============ */
-
-  #duration {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s ease;
-  }
-  #duration.active { opacity: 1; pointer-events: auto; }
-
-  .duration-row {
-    display: flex;
-    gap: clamp(20px, 6vw, 40px);
-  }
-
-  .dcircle {
-    position: relative;
-    width: clamp(72px, 20vw, 96px);
-    height: clamp(72px, 20vw, 96px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.15s ease;
-  }
-  .dcircle:active { transform: scale(0.94); }
-
-  .dcircle svg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .dcircle svg circle {
-    fill: none;
-    stroke: #292927;
-    stroke-width: 0.5;
-    opacity: 1;
-  }
-
-  .dcircle .dnum {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-    font-size: clamp(1.2rem, 4.5vw, 1.6rem);
-    font-weight: 600;
-    z-index: 2;
-    transform: translateY(clamp(-6px, -1.6vw, -4px));
-  }
-  .dcircle .dmin {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, clamp(6px, 1.6vw, 9px));
-    font-size: 0.55rem;
-    font-weight: 400;
-    color: #A6A196;
-    letter-spacing: 0.03em;
-    z-index: 2;
-  }
 
   /* ============ TIMER SCREEN ============ */
 
@@ -405,11 +322,6 @@
   </div>
 </div>
 
-<!-- ============ DURATION SELECT ============ -->
-<div id="duration">
-  <div class="duration-row" id="durationRow"></div>
-</div>
-
 <!-- ============ TIMER ============ -->
 <div id="timer">
   <div class="timer-face">
@@ -424,7 +336,7 @@
 <script>
 (function () {
   const STORAGE_KEY = 'nt-entries';
-  let entries = {}; // dateKey -> {ax1,ay1,acx,acy,ax2,ay2, bx1,by1,bcx,bcy,bx2,by2, rot}
+  let entries = {}; // dateKey -> array of line-mark param objects, one per completed session that day
 
   let today = new Date();
   today.setHours(0,0,0,0);
@@ -433,6 +345,7 @@
   let viewMonth = today.getMonth();
 
   let justCompletedKey = null;
+  let revealPendingKey = null;
   let audioCtx = null;
 
   // ---------- storage ----------
@@ -483,47 +396,101 @@
     return cells;
   }
 
-  // ---------- random hand-drawn X (sketch marker style) ----------
+  // ---------- random hand-drawn line (sketch marker style) — one per completed session ----------
   function jitter(v, r) { return v + (Math.random() * 2 - 1) * r; }
 
-  function strokeParams(x1, y1, x2, y2) {
-    const c1x = x1 + (x2 - x1) * 0.32, c1y = y1 + (y2 - y1) * 0.32;
-    const c2x = x1 + (x2 - x1) * 0.68, c2y = y1 + (y2 - y1) * 0.68;
+  const MAX_COLS = 6;
+  const COL_BAND_LEFT = 9, COL_BAND_RIGHT = 31;
+  const BAND_TOP = 13, BAND_BOTTOM = 37, LINE_LENGTH = 20;
+
+  // width profiles as fraction of base width, from top (t=0) to bottom (t=1):
+  // rounded start, long consistent body — some strokes stay full width to the
+  // end, others taper only a little near the bottom. Chosen randomly per line.
+  const PROFILE_NONE = [
+    { t: 0.00, w: 1.05 },
+    { t: 0.08, w: 1.00 },
+    { t: 0.50, w: 1.00 },
+    { t: 0.90, w: 1.00 },
+    { t: 0.97, w: 0.90 },
+    { t: 1.00, w: 0.75 }
+  ];
+  const PROFILE_SLIGHT = [
+    { t: 0.00, w: 1.05 },
+    { t: 0.08, w: 1.00 },
+    { t: 0.50, w: 1.00 },
+    { t: 0.75, w: 0.95 },
+    { t: 0.88, w: 0.75 },
+    { t: 1.00, w: 0.50 }
+  ];
+
+  function jitteredBlob(cx, cy, r) {
+    const n = 7;
+    const pts = [];
+    for (let i = 0; i < n; i++) {
+      const angle = (i / n) * Math.PI * 2;
+      const rad = r * (0.72 + Math.random() * 0.56);
+      pts.push(`${(cx + Math.cos(angle) * rad).toFixed(2)} ${(cy + Math.sin(angle) * rad).toFixed(2)}`);
+    }
+    return `M ${pts.join(' L ')} Z`;
+  }
+
+  function pickStain() {
+    const r = Math.random();
+    if (r < 0.90) return { scale: 1.0, offX: 0, offY: 0, irregular: false };
+    if (r < 0.975) return { scale: 1.08 + Math.random() * 0.14, offX: jitter(0, 0.15), offY: jitter(0, 0.1), irregular: true };
+    return { scale: 1.25 + Math.random() * 0.2, offX: jitter(0, 0.22), offY: jitter(0, 0.15), irregular: true };
+  }
+
+  function randomLineParams(colIndex) {
+    const step = (COL_BAND_RIGHT - COL_BAND_LEFT) / MAX_COLS;
+    const colX = COL_BAND_LEFT + step * (Math.min(colIndex, MAX_COLS - 1) + 0.5);
+    const centerY = (BAND_TOP + BAND_BOTTOM) / 2 + jitter(0, 1.5);
+    const top = centerY - LINE_LENGTH / 2 + jitter(0, 0.3);
+    const bottom = centerY + LINE_LENGTH / 2 + jitter(0, 1.0);
+    const baseW = 1.0 + jitter(0, 0.15);
+    const leanX = jitter(0, 0.5);
+    const curveX = jitter(0, 0.4);
+    const profile = Math.random() < 0.45 ? PROFILE_NONE : PROFILE_SLIGHT;
+
+    const points = profile.map(p => {
+      const y = top + (bottom - top) * p.t;
+      const x = colX + leanX * p.t + curveX * Math.sin(p.t * Math.PI);
+      return { x, y, halfW: (baseW * p.w) / 2 };
+    });
+
+    const left = points.map(p => `${(p.x - p.halfW).toFixed(2)} ${p.y.toFixed(2)}`);
+    const right = points.slice().reverse().map(p => `${(p.x + p.halfW).toFixed(2)} ${p.y.toFixed(2)}`);
+    const d = `M ${left.join(' L ')} L ${right.join(' L ')} Z`;
+
+    const stain = pickStain();
+    const capX = points[0].x + stain.offX;
+    const capY = points[0].y + stain.offY;
+    const capR = points[0].halfW * stain.scale;
     return {
-      x1: jitter(x1, 0.9), y1: jitter(y1, 0.9),
-      c1x: jitter(c1x, 0.6), c1y: jitter(c1y, 0.6),
-      c2x: jitter(c2x, 0.6), c2y: jitter(c2y, 0.6),
-      x2: jitter(x2, 0.9), y2: jitter(y2, 0.9),
-      w: 2.0 + Math.random() * 0.7
+      d,
+      capX, capY, capR,
+      capBlob: stain.irregular ? jitteredBlob(capX, capY, capR) : null
     };
   }
 
-  function randomXParams() {
-    return {
-      rot: jitter(0, 2.2),
-      a: strokeParams(15, 15, 34, 34),
-      b: strokeParams(34, 15, 15, 34)
-    };
+  function strokeSvg(s, animate) {
+    const cls = animate ? ' animate' : '';
+    const cap = s.capBlob
+      ? `<path d="${s.capBlob}"></path>`
+      : `<circle cx="${s.capX.toFixed(2)}" cy="${s.capY.toFixed(2)}" r="${s.capR.toFixed(2)}"></circle>`;
+    return `<g class="stroke${cls}">
+        ${cap}
+        <path d="${s.d}"></path>
+      </g>`;
   }
 
-  function strokeD(s) {
-    return `M ${s.x1.toFixed(1)} ${s.y1.toFixed(1)} C ${s.c1x.toFixed(1)} ${s.c1y.toFixed(1)}, ${s.c2x.toFixed(1)} ${s.c2y.toFixed(1)}, ${s.x2.toFixed(1)} ${s.y2.toFixed(1)}`;
-  }
-
-  function strokeSvg(s, animate, delayClass) {
-    const cls = animate ? ` animate${delayClass ? ' second' : ''}` : '';
-    const d = strokeD(s);
-    return `
-        <circle class="blot${cls}" cx="${s.x1.toFixed(1)}" cy="${s.y1.toFixed(1)}" r="${(s.w * 0.4 + 0.3).toFixed(1)}"></circle>
-        <path class="core${cls}" pathLength="1" style="stroke-width:${s.w.toFixed(1)}px" d="${d}"></path>`;
-  }
-
-  function xSvg(params, animate) {
-    const p = params;
-    return `<svg class="xmark" viewBox="0 0 40 40">
-      <g transform="rotate(${p.rot.toFixed(2)} 20 20)">${strokeSvg(p.a, animate, false)}${strokeSvg(p.b, animate, true)}
-      </g>
-    </svg>`;
+  function marksSvg(lines, animateLast) {
+    let inner = '';
+    lines.forEach((line, idx) => {
+      const animate = animateLast && idx === lines.length - 1;
+      inner += strokeSvg(line, animate);
+    });
+    return `<svg class="marks" viewBox="0 0 40 40">${inner}</svg>`;
   }
 
   // ---------- calendar rendering ----------
@@ -544,9 +511,18 @@
 
       let mark = '';
       if (!c.out) {
-        const isJust = c.key === justCompletedKey;
-        if (entries[c.key]) {
-          mark = xSvg(entries[c.key], isJust);
+        const dayLines = entries[c.key];
+        if (dayLines && dayLines.length) {
+          let renderLines = dayLines;
+          let animateLast = false;
+          if (c.key === revealPendingKey) {
+            renderLines = dayLines.slice(0, -1);
+          } else if (c.key === justCompletedKey) {
+            animateLast = true;
+          }
+          if (renderLines.length) {
+            mark = marksSvg(renderLines, animateLast);
+          }
         }
       }
       cellsHtml += `<div class="${classes}"><span class="num">${c.day}</span>${mark}</div>`;
@@ -632,29 +608,12 @@
 
   // ---------- screens ----------
   const homeEl = document.getElementById('home');
-  const durationEl = document.getElementById('duration');
   const timerEl = document.getElementById('timer');
-  const durationRow = document.getElementById('durationRow');
   const wordmarkTap = document.getElementById('wordmarkTap');
-
-  function buildDurationCircles() {
-    const durations = [10, 15, 20];
-    durationRow.innerHTML = durations.map((min) => `
-      <button class="dcircle" data-min="${min}">
-        <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18"></circle></svg>
-        <span class="dnum">${min}</span>
-        <span class="dmin">min</span>
-      </button>
-    `).join('');
-    durationRow.querySelectorAll('.dcircle').forEach(btn => {
-      btn.addEventListener('click', () => startSession(parseInt(btn.dataset.min, 10)));
-    });
-  }
 
   function showScreen(name) {
     homeEl.style.opacity = name === 'home' ? '1' : '0';
     homeEl.style.pointerEvents = name === 'home' ? 'auto' : 'none';
-    durationEl.classList.toggle('active', name === 'duration');
     if (name !== 'timer') {
       timerEl.classList.remove('active');
       timerEl.classList.remove('completing');
@@ -662,11 +621,7 @@
   }
 
   wordmarkTap.addEventListener('click', () => {
-    showScreen('duration');
-  });
-
-  durationEl.addEventListener('click', (e) => {
-    if (!e.target.closest('.dcircle')) showScreen('home');
+    startSession(10);
   });
 
   // ---------- timer ----------
@@ -694,7 +649,8 @@
     void ringEl.offsetWidth;
     ringEl.style.transition = 'stroke-dashoffset 1s linear';
 
-    durationEl.classList.remove('active');
+    homeEl.style.opacity = '0';
+    homeEl.style.pointerEvents = 'none';
     timerEl.classList.remove('completing');
     timerEl.classList.add('active');
 
@@ -729,19 +685,27 @@
     timerEl.classList.add('completing');
 
     const key = dateKey(today.getFullYear(), today.getMonth(), today.getDate());
-    if (!entries[key]) {
-      entries[key] = randomXParams();
-      await saveEntries();
-    }
+    if (!entries[key]) entries[key] = [];
+    const newRowIndex = entries[key].length;
+    entries[key].push(randomLineParams(newRowIndex));
+    await saveEntries();
 
     setTimeout(() => {
       timerEl.classList.remove('active');
       timerEl.classList.remove('completing');
       viewYear = today.getFullYear();
       viewMonth = today.getMonth();
-      justCompletedKey = key;
+      justCompletedKey = null;
+      revealPendingKey = key; // hide the just-added line for now
       buildTrack();
       showScreen('home');
+
+      // let the home screen settle, then draw the new line in
+      setTimeout(() => {
+        revealPendingKey = null;
+        justCompletedKey = key;
+        buildTrack();
+      }, 700);
     }, 1700);
   }
 
@@ -775,7 +739,6 @@
   (async function init() {
     await loadEntries();
     buildTrack();
-    buildDurationCircles();
     showScreen('home');
   })();
 })();
