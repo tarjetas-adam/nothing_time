@@ -1604,11 +1604,11 @@ function reorderDecks(fromId, toId) {
 const SR_INTERVALS = [0, 1, 3, 7, 21, 60]; // days per level 1-5
 
 function getSR(deckId) {
-  const raw = localStorage.getItem('sr-' + deckId);
+  const _srDeck2 = decks.find(d => d.id === deckId); const _srKey2 = _srDeck2 ? 'sr-name-' + _srDeck2.name : 'sr-' + deckId; const raw = localStorage.getItem(_srKey2) || localStorage.getItem('sr-' + deckId);
   return raw ? JSON.parse(raw) : {};
 }
 function setSR(deckId, sr) {
-  localStorage.setItem('sr-' + deckId, JSON.stringify(sr));
+  const _srDeck = decks.find(d => d.id === deckId); const _srKey = _srDeck ? 'sr-name-' + _srDeck.name : 'sr-' + deckId; localStorage.setItem(_srKey, JSON.stringify(sr));
 }
 function getCardSR(sr, cardId) {
   return sr[cardId] || { level: 0, nextReview: null };
@@ -1844,7 +1844,7 @@ function nextRound() {
 function restartStudy() {
   clearStudyProgress(currentDeckId);
   localStorage.removeItem('mastery-' + currentDeckId);
-  localStorage.removeItem('sr-' + currentDeckId);
+  const _srDeckR = decks.find(d => d.id === currentDeckId); localStorage.removeItem(_srDeckR ? 'sr-name-' + _srDeckR.name : 'sr-' + currentDeckId); localStorage.removeItem('sr-' + currentDeckId);
   startStudy(currentDeckId);
 }
 
