@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>nothing time</title>
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIk5vdGhpbmcgVGltZSIsICJzaG9ydF9uYW1lIjogIk5vdGhpbmciLCAiZGVzY3JpcHRpb24iOiAiVGhlIEFwcCBhYm91dCBOb3RoaW5nLiIsICJzdGFydF91cmwiOiAiLiIsICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLCAib3JpZW50YXRpb24iOiAicG9ydHJhaXQiLCAiYmFja2dyb3VuZF9jb2xvciI6ICIjRUVFQkUyIiwgInRoZW1lX2NvbG9yIjogIiNFRUVCRTIiLCAiaWNvbnMiOiBbeyJzcmMiOiAiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFNQUFBQURBQ0FJQUFBRGR2dnRRQUFBRmRVbEVRVlI0bk8zZGEwelZkUnpIOFhQeHdFVEdPV3JnSmw2NEhDZ1Q2RkdycmFKbUF4WE5aZXZ5b09WVVZyR2FNeCsweW5KSTZtVDJvSzMxSktCWnJRM0xxV20zTmN0NVFYdFNrWVJsaTZ2QXlBNVhPUktYY1U0UGNrYk9HUDAvLzNQKzUvQi92eDZmMy9mN0czdnY3TTg1WXpqN0FwY2NnRkV1cXkrQStFWkFrQkFRSkFRRUNRRkJRa0NRRUJBa0JBUUpBVUZDUUpBUUVDUUVCQWtCUVVKQWtCQVFKQVFFQ1FGQlFrQ1FFQkFrQkFRSkFVRkNRSkFRRUNRRUJBa0JRVUpBa0JBUUpBUUVDUUZCUWtDUUVCQWtCQVFKQVVGQ1FKQVFFQ1FFQkFrQlFVSkFrQkFRSkFRRUNRRkJRa0NRRUJBa0JBUUpBVUZDUUpBUUVDUUVCQWtCUVVKQWtCQVFKQVFFQ1FGQlFrQ1FFQkFrQkFRSkFVRkNRSkFRRUNRRUJBa0JRVUpBa0JBUUpMT3N2a0FjR0JrWnZmRHpMeGN2L3RyYzB0clYxZDNUMjN2bHl0RG82T2pFeElUYjdVNUttcDJTa3BLV2VrdDZlbnFPUHlzL2YzbU8zKzl5T2EyK2RaUTQrd0tYckw2RDZwN0NJZ09uenA0K1B2VUxSa1pHVDUydU8vNzFpZSsrcng4Zkg1LytaSi9QKzBEaGZXdlhybHAyMjYwR0xoWmZDT2dtaG9hQ3RSOGRQSFQ0V0RBWUZPN2xLQ2pJSzN0bTh4MEYrY3FRR0VkQS94SUtoVDg1K3VrNzFmdkZkQ1piVTdKeTY1Ym41c3hKTW10Z1RPRVo2Qjg5UGIwVnV5cC9xUC9SM0xHZmYvRlZRMFBqdnNwZFM1WXNObmR5TE9DM3NHdCthcnl3c2JUTTlIcisxdEhaVmZiOHR1YVcxa2dNdHhZQk9Sd094NW02YzF1MnZ0amZQeEM1RllPRGd5OXNlNm03Ky9mSXJiQUVBVG5PMUoxN2RjZnIvK3YzTEdQNit2dGYzbDQrTmpZVzZVWFJaUGVBR2hvYWQ1VHZucGlZaU02NnB1YVc2cHIzb3JNck9td2RVQ0RRODhwck82UHczalBaZ1k4UHRiUzJSWE5qUk5rM29GQW9YTEc3Y21CZ01PcDdRMVhWKzZPOE5ITHNHOURoSTBmcjY4OWJzcnJ1N0xjZEhaMldyRGFkZlFPcXFySHNiU0FjRGgvNzdFdXJ0cHZMdmdGZHZUcHM0Zlp2VHB5MGNMdUorQ1Q2UHlVbUptWm5aeTVhdU5Ebjg4N3llTWJHeHZyNitqczd1NXFhVzBLaGtEajg4dVUvMnRyYU16S1dtbkpWQ3hIUWpSSVRFNHVMVmhRWHJjalB5L040YnZMekNRYURKMC9WMVI0NDJOWXVmWTE0dnFHUmdHWVVsOHU1L3VGMXBadWU4bnE5VTd3c09UbDU3WnBWSmF1TFAvaXd0dWJkOThQaHNMRjF2elUxR3pzWVV3am9tZ1VMMGlyS3QrZm5MWi9tNjEwdTE4WU5UNmFscHU3Wis0YXhqZTN0SGNZT3hoVDdQa1JQNXZkbjFWUzlQZjE2cml0WlhienVvUkpqU3dPQmdMR0RNWVdBSElzWHBiLzE1cjU1YytjYU8vN3MwNXM5SG8rQmd3T0QwZjRNTXhMc0hsQkNRc0xlUFR1bmZ1aVptcy9udmIvd1hnTUhoNGYvTkx3MGR0ZzlvTkpOR3pJek04UWhkOTkxcDRGVFVmc0dONkpzSFZCYVd1b1RqeitpejhuTjlldEQ0cFN0QTNyczBmWEdIbDl1a0phYXFnK0pVL1lOeU9sMHJpeDYwSlJSU1VtelRaa1RqK3diVUc2dWYvNzhlYWFNY3J2ZHBzeUpSL1lOS08vMlpWWmZZU2F3YjBCTDQvOTdxRmhnMzRCeXNyT3N2c0pNWU4rQVp1U2YrVVdmZlFQeStZeC8rb3pyN0JzUVRFRkFrQkFRSkFRRUNRRkJRa0NRRUJBa0JBUUpBVUZDUUpBUUVDUUVCQWtCUVVKQWtCQVFKQVFFQ1FGQlFrQ1FFQkFrQkFRSkFVRkNRSkFRRUNRRUJBa0JRVUpBa0JBUUpBUUVDUUZCUWtDUUVCQWtCQVFKQVVIaTdBdEkvelVOTnNjN0VDUUVCQWtCUVVKQWtCQVFKQVFFQ1FGQlFrQ1FFQkFrQkFRSkFVRkNRSkFRRUNRRUJBa0JRVUpBa0JBUUpBUUVDUUZCUWtDUUVCQWtCQVFKQVVGQ1FKQVFFQ1FFQkFrQlFVSkFrQkFRSkFRRUNRRkJRa0NRRUJBa0JBUUpBVUZDUUpBUUVDUUVCQWtCUVVKQWtCQVFKQVFFQ1FGQlFrQ1FFQkFrQkFRSkFVRkNRSkFRRUNRRUJBa0JRVUpBa0JBUUpBUUVDUUZCUWtDUUVCQWtCQVFKQVVGQ1FKQVFFQ1FFQkFrQlFmSVhBZkVmbUdsOHJtNEFBQUFBU1VWT1JLNUNZSUk9IiwgInNpemVzIjogIjE5MngxOTIiLCAidHlwZSI6ICJpbWFnZS9wbmcifSwgeyJzcmMiOiAiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFnQUFBQUlBQ0FJQUFBQjdHa090QUFBUVNFbEVRVlI0bk8zZGVaRGVkV0hIOGQzTkJwSWxCSE5KRGtJT05pRTAwTEZWUUlmeFFpRUVsUms3cGVOUklZcW8xYXJVSWdoRUJPOHFWQ3BhOEdvOWlxS2dJTjVYTGd6SXJSd1JDQVJZSUFkTE5wZmtJUHZzOWc4emp0VVFLc251OS9kN1BxL1huNW5NOC92a24rZWRaMzVYYTA5M1Z3c0FlZHBLRHdDZ0RBRUFDQ1VBQUtFRUFDQ1VBQUNFRWdDQVVBSUFFRW9BQUVJSkFFQW9BUUFJSlFBQW9RUUFJSlFBQUlRU0FJQlFBZ0FRU2dBQVFna0FRQ2dCQUFnbEFBQ2hCQUFnbEFBQWhCSUFnRkFDQUJCS0FBQkNDUUJBS0FFQUNDVUFBS0VFQUNDVUFBQ0VFZ0NBVUFJQUVFb0FBRUlKQUVBb0FRQUlKUUFBb1FRQUlKUUFBSVFTQUlCUUFnQVFTZ0FBUWdrQVFDZ0JBQWdsQUFDaEJBQWdsQUFBaEJJQWdGQUNBQkJLQUFCQ0NRQkFLQUVBQ0NVQUFLRUVBQ0NVQUFDRUVnQ0FVQUlBRUVvQUFFSUpBRUFvQVFBSUpRQUFvUVFBSUpRQUFJUVNBSUJRQWdBUVNnQUFRZ2tBUUNnQkFBZ2xBQUNoQkFBZ2xBQUFoQklBZ0ZBQ0FCQktBQUJDQ1FCQUtBRUFDQ1VBQUtFRUFDQ1VBQUNFRWdDQVVBSUFFRW9BQUVJSkFFQW9BUUFJSlFBQW9RUUFJSlFBQUlRU0FJQlFBZ0FRU2dBQVFna0FRQ2dCQUFnbEFBQ2hCQUFnbEFBQWhCSUFnRkFDQUJCS0FBQkNDUUJBS0FFQUNDVUFBS0VFQUNDVUFBQ0VFZ0NBVUFJQUVFb0FBRUlKQUVBb0FRQUlKUUFBb1FRQUlKUUFBSVFTQUlCUUFnQVFTZ0FBUWdrQVFDZ0JBQWdsQUFDaEJBQWdsQUFBaEJJQWdGQUNBQkJLQUFCQ0NRQkFLQUVBQ0NVQUFLRUVBQ0NVQUFDRUVnQ0FVQUlBRUVvQUFFSUpBRUFvQVFBSUpRQUFvUVFBSUpRQUFJUVNBSUJRQWdBUVNnQUFRZ2tBUUNnQkFBZ2xBQUNoQkFBZ2xBQUFoQklBZ0ZBQ0FCQktBQUJDQ1FCQUtBRUFDQ1VBQUtFRUFDQ1VBQUNFRWdDQVVBSUFFRW9BQUVJSkFFQW9BUUFJSlFBQW9RUUFJSlFBQUlRU0FJQlFBZ0FRU2dBQVFna0FRQ2dCQUFnbEFBQ2hCQUFnbEFBQWhCSUFnRkFDQUJCS0FBQkNDUUJBcVBiU0E2QUcrdnY3MTY3dGVmaVJSMWV0V3YxWWQzZDM5K1ByMXExYnYzN2p4azJidG16WnNtWHpscTNidGpVYWpiNitSbjkveTVBaFE5cmJoN1FQYVIvZU1YeWZqbzU5UnV5ejM4aVJvMGVQSGpObTFMUEhqWnN3WWZ3Qmt5YU9INy8va0NGRFN2K3pTTmZhMDkxVmVnTlVUcVBSdU8vK0ZjdVczWDN2OHZ1V0w3Ly93WWU2dG16WnNnYy9mK2pROWlsVER1dzhhUHJNR1oySEhUWjdSbWZuMEtIK044WmdFd0RZb2IrLy81NTdsdDkwOHkwMzMzTGJIWGN1MjdadDI2QWRlcSs5OXBvOSs1QWpEMy91ODQ4OG9yTnplbXRyNjZBZG1tUUN3QTVIdmVpWTBoUCsxTklsUHh1RW96UWFqVnR1L2ZYQ1JVdVdMdjNWMnA2ZVFUamlybzBiTi9ib2w3em82S05mUFB1dkRsRUNCcFFBc0VOZ0FPNWY4Y0Izci9uQkx4WXNXcjkrdzRBZTZKbVpQUG1BRTE0NTkvaTVjNTcxclAxS2I2RTVDUUE3NUFTZ3Q3ZDN3YUlsVjF4eDFiTGYzajBRbjc5bkRSMDY5TGc1TDMvOWEvOWg4dVFEU20raDJRZ0FPeVFFWU51MmJWZGY4NE92ZitOYmp6KytkczkrOGtCcmJXMDkrcVV2UHZYTjh5WWZNS24wRnBxSEN3K0lzSDE3NzlYZi9kNVh2L2FObm5YclNtOTVKdnI3KzMreFlOR2l4ZGVlOEtyajMzcnFtL2JkZDBUcFJUUURBYUQ1TFZwODdXY3YrY0xLbGF0S0Q5bGRqVWJqcXF1L3QyRGhrcmUvN2Mydk9INk9VOFRzSmdHZ21UM3k2TW9MTHZ6MFRUZmZVbnJJbnJSaHc0YVAvZHVGQ3hZdVB2dDlwNDhkTzZiMEhHck1veUJvVG4xOWZaZC84OHFUNXIybHliNzkvK0NHRzI5K3c3eFRmN24wK3RKRHFERUJvQW10V3IzbUhlOTh6OFdmL2R4ZzNzdzErRFp1M0hUbVdlZCsvb3YvM2RmWFYzb0x0U1FBTkp1Rmk1Yk1lK05iYjcvanJ0SkRCc2xYdnZyMXM4NDViK3ZXWms0ZEEwUUFhQjY5dmIyZnZ2aVMrZWQrNkhkUFBGRjZ5NkQ2NWRMcjMzbmE2UnMyVlBGMk5xcE1BR2dTR3pac2VQZS9uUEhOSzc1VGVrZ1p5NWJkL2Mvdk9yMmF0elJUV1FKQU0zandvYTVUVG4zSHIzOXpSK2toSmExNDRNRjN2bHNEK0FzSUFMVjMrKzEzL3RNN1RsdTFlazNwSWVXdGVPREIwODg0Wit2V3JhV0hVQThDUUwxZGQvME43MzdQbVJzM2JpbzlwQ3ArZS9jOTU3ei9nNDFHby9RUWFrQUFxTEVGQzVlY2RjNTVUejc1Wk9raDFmS3JHMjc2ekdjL1Yzb0ZOU0FBMU5YaUpVcy9jUDVIZW50N1N3K3BvbTlkZWRXUGYvTHowaXVvT2dHZ2xxNjcvb1p6ei91d0c2QjI0Wk1YWHRUVjlYRHBGVlNhQUZBL3Q5OXgxL3h6UCtULy9ydTJkZXUyRDV6LzBlM2J0NWNlUW5VSkFEWFQxZlh3R2UrYjM5elBlTmhUN2wxKzM1ZS9jbG5wRlZTWEFGQW5Help1Zk8rWjh6ZHQrbDNwSWJYeHRjc3V2Ky8rRmFWWFVGRUNRRzAwR28xejN2L0JSeDVkV1hwSW5UUWFqVTljY0ZGL2YzL3BJVlNSQUZBYmwzN3VTN2ZkOXB2U0srcm5ycnQrKzdOZkxDeTlnaW9TQU9yaDJsOWU5L1hMcnlpOW9xNHV1ZVNMN3BiZ3p3a0FOZkJZZC9kSFAzNUI2UlUxOWxoMzkxWGYvWDdwRlZTT0FGQjEvZjM5SC83SUp6enNZVGRkZHRrM1hUckZueEFBcXU3S2IxOTl5NjIvTHIyaTl0YjI5UHp3Uno4dHZZSnFFUUFxYmZYcU5aZCsva3VsVnpTSmIxMTVsY3VCK0dNQ1FLVjk0b0tMdk94d1QrbnFldmpHbTI0cHZZSUtFUUNxYTlIaWEyKzQ4ZWJTSzVyS05kLzdZZWtKVklnQVVGMFhlNmJ4bnJiMHV1czNiTnhZZWdWVklRQlUxMm92K2RyVHRtL3ZYYkJnY2VrVlZJVUFRSlpGaTY4dFBZR3FFQURJY3V0dHYzRlRCYjhuQUpDbHI2L3Z4cHVjV3FlbFJRQWdrR3VyK0QwQmdEZzMzWHhyNlFsVVFudnBBVkRHK1BIN0h6eXpjK3JVS1FkTW1yVC8vczhlTTNyVXlQMUdkZ3dmUG5UbzBMYTJ0a2FqOGVTVFQyN2V2R1g5K2cyUHIxMjdldldhaHg3cVduNy9pbnZ1V2I1NTgrYlMyM2RYZC9manExZXZHVDkrLzlKREtFd0FDREo2MUtpampucitFWWMvN3puUE9XejBxRkc3K0p2dDdlM3Q3ZTBkSFIxang0N3A3SnoraHovdjYrdTc5OTc3cnYvVmpRc1hMYmwveFFNRFAzbWczSEhuTWdHZ3RhZTdxL1FHS3VHb0Z4MVRlc0pBNmVqb09PYmxMNTF6N01zT08vVFF0cmJXUGZXeDl5Ni83OXZmdWVZblAvM1o5dTMxZXozOWlYLy82dFBlOWZiU0t5aE1BTmloS1FNd1lmeityMzNOaVhPUE82YWpvMk9BRHZGWWQvY1h2L1NWSC83b3AvVjZ6dHJmL3Mxekx2NlBUNVplUVdFQ3dBNU5Gb0J4NDhhZThzYVRqcDk3N0pBaFF3YmhjSGZjZWRkSFB2ckpoeDk1ZEJDT3RVZU1ITG52ajc3L25kSXJLTXhWUURTYjl2YjJrMDk2M2VXWGZmbFZyNXc3T04vK0xTMHRoeDA2Kzh2L2RlbkxqbjdKNEJ4dTkyM2N1S2xuM2JyU0t5ak1TV0NheXV6Wmg1eDk1cjlPblRwbDhBODliTml3OHo5dzlzU0pFNzcyUDk4WS9LTS9BNDg4c25MWFo4SnBlbjRCMENUYTJscm5uZlQ2U3o3enFTTGYvci9YMnRyNnRyZTg2ZVNUWGxkcXdGOWs1Y3BWcFNkUW1GOEFOSU1SSTBaODZQejVSeHorM05KRFdscGFXazQ5WmQ2YU5ZLzkrQ2MvTHoza2FheGF0YnIwQkFyekM0RGFtelJwNGhjdS9YUkZ2djFiV2xwYVcxdlBPUDIwYWRPbWxoN3lOTmIyOUpTZVFHRUNRTDFObnpiMTB2Kzg2TUFESjVjZThuL3N2ZmZlODg5Njd4Njg1MkFnOUFoQVBBR2d4am83cDMvbTRndXJlU1p6MXF5Wko3enFGYVZYN0VwUHovclNFeWhNQUtpckNSUEcvL3NGSDl0djVNalNRNTdTbSthOVlhKzk5aXE5NGlrOThjUVRwU2RRbUFCUVMvdnVPK0pURjM1OHpPalJwWWZzeXBneG8xOXgvSnpTSzU3Uzd3UWduZ0JRUDIxdHJlZWRlL2JrQXlhVkh2TDAvdTdWSjVTZThKUTJiOTVTZWdLRkNRRDFNKy9rZjN6K2tZZVhYdkgvTW4zYTFKa3pPa3V2MkxuZTN1MmxKMUNZQUZBemg4dzZlTjVKcnkrOTRpL3draGUvc1BTRW5ldnRiWlNlUUdFQ1FKME1IZHIrL3ZsbkR0b1RmdmFJSTQ5NFh1a0pPOWRvQ0VBNkFhQk9YdnVhRTZkVTdKTC9welZ6WnVmQVBZeDZkOVRyK2RVTUJBR2dOcDQ5YnR6SmI2akhZM2IrV0Z0YjI2eURaNVplQVRzaEFOVEdtMDg1ZWRpd1lhVlhQQk9kQjAwclBRRjJRZ0NvaDBtVEpoNDM1K1dsVnp4RFU2WWNXSG9DN0lRQVVBK3ZlODJKOVRyMys4ZThmcDFxRWdCcVlNUSsreHczcDhadnJLejRIY3ZFRWdCcVlNNnhMeHMyYk8vU0s1NjVVYU9lVlhvQzdJUUFVQU56NXg1YmVzSnVHVDU4ZU9rSnNCTUNRTlZObUREK2tGa0hsMTZ4Vy9iZXU3clBCQ1daQUZCMUx6enFCYVVuN0s3Nm5yNm11UWtBVmZlQ0Z4eFplc0x1YW0ydDlLdkJpQ1VBVkZwN2UvdGZIM1pvNlJYUW5BU0FTcHZSZVZDdHIvK0JLaE1BS20zV0xFL1JnWUVpQUZUYWpNNkRTaytBcGlVQVZKcW42TURBRVFBcWJmTGtHcno0RjJwS0FLaXU0Y09Iang0MXF2UUthRm9DUUhYTm1IR1FLK2hoNEFnQTFUWGpvT21sSjBBekV3Q3FhOXEwcWFVblFETVRBS3Jyd0xxOS94M3FSUUNvcm9rVEo1U2VBTTFNQUtpdWNXUEhsSjRBelV3QXFLNzI5dmJTRTZDWkNRQkFLQUVBQ0NVQUFLRUVBQ0NVQUFDRUVnQ0FVQUlBRUVvQUFFSUpBRUFvQVFBSUpRQUFvUVFBSUpRQUFJUVNBSUJRQWdBUVNnQUFRZ2tBUUNnQkFBZ2xBQUNoQkFBZ2xBQUFoQklBZ0ZBQ0FCQktBQUJDQ1FCQUtBRUFDQ1VBQUtFRUFDQ1VBQUNFRWdDQVVBSUFFRW9BQUVJSkFFQW9BUUFJSlFBQW9RUUFJSlFBQUlRU0FJQlFBZ0FRU2dBQVFna0FRQ2dCQUFnbEFBQ2hCQUFnbEFBQWhCSUFnRkFDQUJCS0FBQkNDUUJBS0FFQUNDVUFBS0VFQUNDVUFBQ0VFZ0NBVUFJQUVFb0FBRUlKQUVBb0FRQUlKUUFBb1FRQUlKUUFBSVFTQUlCUUFnQVFTZ0FBUWdrQVFDZ0JBQWdsQUFDaEJBQWdsQUFBaEJJQWdGQUNBQkJLQUFCQ0NRQkFLQUVBQ0NVQUFLRUVBQ0NVQUFDRUVnQ0FVQUlBRUVvQUFFSUpBRUFvQVFBSUpRQUFvUVFBSUpRQUFJUVNBSUJRQWdBUVNnQUFRZ2tBUUtqV251NnUwaHNBS01BdkFJQlFBZ0FRU2dBQVFna0FRQ2dCQUFnbEFBQ2hCQUFnbEFBQWhCSUFnRkFDQUJCS0FBQkNDUUJBS0FFQUNDVUFBS0VFQUNDVUFBQ0VFZ0NBVUFJQUVFb0FBRUlKQUVBb0FRQUlKUUFBb1FRQUlKUUFBSVFTQUlCUUFnQVFTZ0FBUWdrQVFDZ0JBQWdsQUFDaEJBQWdsQUFBaEJJQWdGQUNBQkJLQUFCQ0NRQkFLQUVBQ0NVQUFLRUVBQ0NVQUFDRUVnQ0FVQUlBRUVvQUFFSUpBRUFvQVFBSUpRQUFvUVFBSUpRQUFJUVNBSUJRQWdBUVNnQUFRZ2tBUUNnQkFBZ2xBQUNoQkFBZ2xBQUFoQklBZ0ZBQ0FCQktBQUJDQ1FCQUtBRUFDQ1VBQUtFRUFDQ1VBQUNFRWdDQVVBSUFFRW9BQUVJSkFFQW9BUUFJSlFBQW9RUUFJSlFBQUlRU0FJQlFBZ0FRU2dBQVFna0FRQ2dCQUFnbEFBQ2hCQUFnbEFBQWhCSUFnRkFDQUJCS0FBQkNDUUJBS0FFQUNDVUFBS0VFQUNDVUFBQ0VFZ0NBVUFJQUVFb0FBRUlKQUVBb0FRQUlKUUFBb1FRQUlKUUFBSVFTQUlCUUFnQVFTZ0FBUWdrQVFDZ0JBQWdsQUFDaEJBQWdsQUFBaEJJQWdGQUNBQkJLQUFCQ0NRQkFLQUVBQ0NVQUFLRUVBQ0NVQUFDRUVnQ0FVQUlBRUVvQUFFSUpBRUFvQVFBSUpRQUFvUVFBSUpRQUFJUVNBSUJRQWdBUVNnQUFRZ2tBUUNnQkFBZ2xBQUNoQkFBZ2xBQUFoQklBZ0ZBQ0FCQktBQUJDQ1FCQUtBRUFDQ1VBQUtFRUFDQ1VBQUNFRWdDQVVBSUFFRW9BQUVJSkFFQW9BUUFJSlFBQW9RUUFJSlFBQUlRU0FJQlFBZ0FRU2dBQVFna0FRQ2dCQUFnbEFBQ2hCQUFnbEFBQWhCSUFnRkFDQUJCS0FBQkNDUUJBS0FFQUNDVUFBS0VFQUNDVUFBQ0VFZ0NBVUFJQUVFb0FBRUlKQUVBb0FRQUlKUUFBb1FRQUlKUUFBSVFTQUlCUS93djBYZXg2T0FjSk9RQUFBQUJKUlU1RXJrSmdnZz09IiwgInNpemVzIjogIjUxMng1MTIiLCAidHlwZSI6ICJpbWFnZS9wbmcifV19">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAFJUlEQVR4nO3df0zUdRzHcY4TjosEB0EJHLAWIGBom6uMSfMHVFtz1Vo1Slv1T8vaXFt/5GppZuU0DbWfZlaTP+zH3Por5UdIMmFttRbj15wZtIljnGCMn3dcf7i55nopfPne98v1eT7+vft83+8/nrv73ndseIIDvXHAf4l3ewHMX8QBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBaYHbC8xHIyMj7e0dZ8/92dvbNzgYHBoanpycDIVCXq/X7/enLkq5JTMzNzdQWFiwpKggMTHR7X2jJVbjKK+onO2Rlua6a7/hfP+FurrGpuafenrORCKRmVzT5/OtWHFH1bo1FavK/3+VxGoc9uro7Priy9rTrW3T0zNq4oqJiYmWltaWltb0tLQnqx975OH1CQkJUVrSeZ7gQK/bO1hh1yfHYDBYs++jhsYmG3aKiwsEcl7b8srS0hJbruY6o29ITzafqn7qObvKiIuL6+v764UXX/7u2Pd2XdBdhn6tTE9HPjl46EjtUduvHA6H9+zdP/L3yNMbq22/uMNMjCMcDm/fsbOu/sfojfj0s8Opi1IeWv9g9EY4wLivlenpyLbt70a1jMv2vv9BZ1d3tKdElXFx7D9g2+3ntYVCoTff2jk1NeXArCgxK44T9Y1ff3vMsXG9vX3fODjOdgbF0d9/YdfuGoeHHqk9Oj4+7vBQuxgUx673akZHRx0eOnzp0vETDQ4PtYtBcbS2/ezK3B+OX+ex/bxlUBxu+b29Y2ho2O0trDDxOcdVPB7PsrKl96y8q6SkOJCTnZqa4vUuGBsbGxgY6O45c7q1renkqbn86IhEIr/8+tua1RU27uwMo+OIj/c8cH/Vxg3VOdlZV72UnHxDcnJefn7efVVrBweD+w58XN9g/dFIZ1c3ccSSrKzFW19/tbS0+LrvTE9P2/bGlrzcwKHDX1mbdfaPc9YOusvQe45lZbd/fvDDmZRxxbPPbKhct9rauP7z/dYOusvEOIqXFO3Z/fbChTfO9uBLm5639ucaFy8OWTjlOuPiSE1JeWfH1qSkJAtn09PTKlaVWzg4Oub08xVbGBfH5s2bMjJusnx85d13Wjg1NRWyPNFFZsVRVFRQudbifcNlhYW32bXM/GdWHE88/qjH45nLFW7OzLBrmfnPoDiSkpLutXTH8G9+v9+WZWKCQXEsX17m8/nmeBGv12vLMjHBoDhKiovcXiHGGBRHIJDj9goxxqA4bs3Pd3uFGGNQHNnZi91eIcYYFIdRPzRsYVAcmC3igEQckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5IxAGJOCARByTigEQckIgDEnFAIg5IxAEpVv8jNRzAJwck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJD+ASclAUxXDwP+AAAAAElFTkSuQmCC">
+<meta name="theme-color" content="#EEEBE2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Nothing Time">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EEEBE2;
+    --ink: #292927;
+    --ink-quiet: #85837B;
+    --grid-line: #D2CFC4;
+    --mark: #292927;
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    background: var(--paper);
+    overscroll-behavior: none;
+  }
+
+  body {
+    font-family: 'Instrument Sans', -apple-system, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    height: 100dvh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  button { font-family: inherit; }
+
+  /* ============ HOME SCREEN ============ */
+
+  #home {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(16px, 5vw, 48px) clamp(18px, 5.5vw, 56px) clamp(20px, 5vh, 44px);
+    transition: opacity 0.35s ease;
+  }
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 0 auto;
+  }
+
+  .eyebrow {
+    font-size: clamp(0.62rem, 1.6vw, 0.72rem);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+
+  .palette {
+    display: flex;
+  }
+  .palette span {
+    width: clamp(14px, 3vw, 18px);
+    height: clamp(8px, 1.8vh, 11px);
+  }
+
+  .wordmark {
+    flex: 0 0 auto;
+    margin-top: clamp(10px, 2.5vh, 22px);
+    cursor: pointer;
+    width: fit-content;
+    transition: transform 0.15s ease;
+  }
+  .wordmark:active { transform: scale(0.98); }
+
+  .wordmark h1 {
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3.4rem, 18.5vw, 6.8rem);
+    line-height: 0.87;
+    letter-spacing: -0.015em;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .wordmark-line {
+    display: block;
+    opacity: 0;
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+  .wordmark-line.line1 { animation-delay: 0.05s; }
+  .wordmark-line.line2 { animation-delay: 0.22s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .tagline {
+    flex: 0 0 auto;
+    margin-top: clamp(8px, 2vh, 16px);
+    font-size: clamp(0.85rem, 3vw, 1rem);
+    font-weight: 400;
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 0.6s ease-out forwards;
+    animation-delay: 0.42s;
+  }
+
+  .calendar-block {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    margin-top: auto;
+    opacity: 0;
+    animation: fadeUp 0.6s ease-out forwards;
+    animation-delay: 0.62s;
+  }
+
+  .carousel-viewport {
+    flex: 0 0 auto;
+    position: relative;
+    overflow: hidden;
+    width: 95%;
+    margin: 0 auto;
+  }
+
+  .carousel-track {
+    display: flex;
+    width: 300%;
+    transform: translateX(-33.3333%);
+  }
+
+  .carousel-track.animating {
+    transition: transform 0.45s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+
+  .panel {
+    flex: 0 0 33.3333%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .panel-title {
+    flex: 0 0 auto;
+    font-size: clamp(0.95rem, 3.4vw, 1.15rem);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: clamp(8px, 2vh, 16px);
+  }
+
+  .panel-weekdays {
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 4px;
+  }
+  .panel-weekdays span {
+    text-align: center;
+    font-size: clamp(0.56rem, 1.9vw, 0.68rem);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--ink-quiet);
+    text-transform: uppercase;
+  }
+
+  .panel-grid {
+    flex: 0 0 auto;
+    width: 100%;
+    aspect-ratio: 7 / 6;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    border-top: 1px solid var(--grid-line);
+    border-left: 1px solid var(--grid-line);
+  }
+
+  .cell {
+    position: relative;
+    border-right: 1px solid var(--grid-line);
+    border-bottom: 1px solid var(--grid-line);
+  }
+
+  .cell.weekend { background: rgba(41, 41, 39, 0.025); }
+
+  .cell .num {
+    position: absolute;
+    top: clamp(3px, 1vh, 8px);
+    left: clamp(4px, 1.4vw, 9px);
+    font-size: clamp(0.6rem, 2vw, 0.72rem);
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .cell.out .num { color: var(--grid-line); }
+  .cell.future .num { color: var(--ink-quiet); opacity: 0.55; }
+
+  .cell.today {
+    background: rgba(41, 41, 39, 0.09);
+  }
+
+  .cell .marks {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .cell .marks .stroke {
+    transform-box: fill-box;
+    transform-origin: top center;
+  }
+  .cell .marks .stroke circle,
+  .cell .marks .stroke path {
+    fill: var(--mark);
+  }
+  .cell .marks .stroke.animate {
+    animation: growDown 1.5s cubic-bezier(0.25, 0.85, 0.2, 1) forwards;
+  }
+
+  @keyframes growDown {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+  }
+
+  .cell:not(.out):not(.future) { cursor: default; }
+
+  /* ============ TIMER SCREEN ============ */
+
+  #timer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.6s ease;
+  }
+  #timer.active { opacity: 1; pointer-events: auto; }
+  #timer.completing { transition: opacity 1.6s ease; opacity: 0; }
+
+  .timer-face {
+    position: relative;
+    width: clamp(220px, 62vw, 320px);
+    height: clamp(220px, 62vw, 320px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .timer-face svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+  .timer-face circle.track {
+    fill: none;
+    stroke: rgba(41,41,39,0.14);
+    stroke-width: 1.4;
+  }
+  .timer-face circle.progress {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s linear;
+  }
+
+  .timer-readout {
+    position: relative;
+    z-index: 2;
+    font-size: clamp(2.2rem, 9vw, 3.2rem);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ============ HOME ============ -->
+<div id="home">
+  <div class="header-row">
+    <div class="eyebrow">01 — Nothing Time</div>
+    <div class="palette">
+      <span style="background:#D1A82E"></span>
+      <span style="background:#D87B35"></span>
+      <span style="background:#AD3D2D"></span>
+      <span style="background:#675076"></span>
+      <span style="background:#486B72"></span>
+      <span style="background:#3D6B43"></span>
+    </div>
+  </div>
+
+  <div class="wordmark" id="wordmarkTap">
+    <h1><span class="wordmark-line line1">nothing</span><span class="wordmark-line line2">time</span></h1>
+  </div>
+
+  <div class="tagline">The App about Nothing.</div>
+
+  <div class="calendar-block">
+    <div class="carousel-viewport" id="carouselViewport">
+      <div class="carousel-track" id="carouselTrack"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TIMER ============ -->
+<div id="timer">
+  <div class="timer-face">
+    <svg viewBox="0 0 100 100">
+      <circle class="track" cx="50" cy="50" r="47"></circle>
+      <circle class="progress" id="progressRing" cx="50" cy="50" r="47"></circle>
+    </svg>
+    <div class="timer-readout" id="timerReadout">00:00</div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const STORAGE_KEY = 'nt-entries';
+  let entries = {}; // dateKey -> array of line-mark param objects, one per completed session that day
+
+  let today = new Date();
+  today.setHours(0,0,0,0);
+
+  let viewYear = today.getFullYear();
+  let viewMonth = today.getMonth();
+
+  let justCompletedKey = null;
+  let revealPendingKey = null;
+  let audioCtx = null;
+
+  // ---------- storage ----------
+  async function loadEntries() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      entries = raw ? JSON.parse(raw) : {};
+    } catch (e) { entries = {}; }
+  }
+  async function saveEntries() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(entries)); }
+    catch (e) { console.error('storage failed', e); }
+  }
+
+  // ---------- date helpers ----------
+  function dateKey(y, m, d) {
+    return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  }
+  function daysInMonth(y, m) { return new Date(y, m+1, 0).getDate(); }
+  function monthNames() {
+    return ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  }
+
+  function buildCells(y, m) {
+    const first = new Date(y, m, 1);
+    const startOffset = (first.getDay() + 6) % 7; // Monday-first
+    const total = daysInMonth(y, m);
+    const prevM = m === 0 ? 11 : m - 1;
+    const prevY = m === 0 ? y - 1 : y;
+    const prevTotal = daysInMonth(prevY, prevM);
+
+    const cells = [];
+    for (let i = startOffset - 1; i >= 0; i--) {
+      cells.push({ day: prevTotal - i, out: true });
+    }
+    for (let d = 1; d <= total; d++) {
+      const dt = new Date(y, m, d); dt.setHours(0,0,0,0);
+      cells.push({
+        day: d, out: false,
+        key: dateKey(y, m, d),
+        future: dt.getTime() > today.getTime(),
+        isToday: dt.getTime() === today.getTime()
+      });
+    }
+    while (cells.length < 42) {
+      cells.push({ day: cells.length - (startOffset + total) + 1, out: true });
+    }
+    return cells;
+  }
+
+  // ---------- random hand-drawn line (sketch marker style) — one per completed session ----------
+  function jitter(v, r) { return v + (Math.random() * 2 - 1) * r; }
+
+  const MAX_COLS = 6;
+  const COL_BAND_LEFT = 9, COL_BAND_RIGHT = 31;
+  const BAND_TOP = 13, BAND_BOTTOM = 37, LINE_LENGTH = 20;
+
+  // width profiles as fraction of base width, from top (t=0) to bottom (t=1):
+  // rounded start, long consistent body — some strokes stay full width to the
+  // end, others taper only a little near the bottom. Chosen randomly per line.
+  const PROFILE_NONE = [
+    { t: 0.00, w: 1.05 },
+    { t: 0.08, w: 1.00 },
+    { t: 0.50, w: 1.00 },
+    { t: 0.90, w: 1.00 },
+    { t: 0.97, w: 0.90 },
+    { t: 1.00, w: 0.75 }
+  ];
+  const PROFILE_SLIGHT = [
+    { t: 0.00, w: 1.05 },
+    { t: 0.08, w: 1.00 },
+    { t: 0.50, w: 1.00 },
+    { t: 0.75, w: 0.95 },
+    { t: 0.88, w: 0.75 },
+    { t: 1.00, w: 0.50 }
+  ];
+
+  function jitteredBlob(cx, cy, r) {
+    const n = 7;
+    const pts = [];
+    for (let i = 0; i < n; i++) {
+      const angle = (i / n) * Math.PI * 2;
+      const rad = r * (0.72 + Math.random() * 0.56);
+      pts.push(`${(cx + Math.cos(angle) * rad).toFixed(2)} ${(cy + Math.sin(angle) * rad).toFixed(2)}`);
+    }
+    return `M ${pts.join(' L ')} Z`;
+  }
+
+  function pickStain() {
+    const r = Math.random();
+    if (r < 0.90) return { scale: 1.0, offX: 0, offY: 0, irregular: false };
+    if (r < 0.975) return { scale: 1.08 + Math.random() * 0.14, offX: jitter(0, 0.15), offY: jitter(0, 0.1), irregular: true };
+    return { scale: 1.25 + Math.random() * 0.2, offX: jitter(0, 0.22), offY: jitter(0, 0.15), irregular: true };
+  }
+
+  function randomLineParams(colIndex) {
+    const step = (COL_BAND_RIGHT - COL_BAND_LEFT) / MAX_COLS;
+    const colX = COL_BAND_LEFT + step * (Math.min(colIndex, MAX_COLS - 1) + 0.5);
+    const centerY = (BAND_TOP + BAND_BOTTOM) / 2 + jitter(0, 1.5);
+    const top = centerY - LINE_LENGTH / 2 + jitter(0, 0.3);
+    const bottom = centerY + LINE_LENGTH / 2 + jitter(0, 1.0);
+    const baseW = 1.0 + jitter(0, 0.15);
+    const leanX = jitter(0, 0.5);
+    const curveX = jitter(0, 0.4);
+    const profile = Math.random() < 0.45 ? PROFILE_NONE : PROFILE_SLIGHT;
+
+    const points = profile.map(p => {
+      const y = top + (bottom - top) * p.t;
+      const x = colX + leanX * p.t + curveX * Math.sin(p.t * Math.PI);
+      return { x, y, halfW: (baseW * p.w) / 2 };
+    });
+
+    const left = points.map(p => `${(p.x - p.halfW).toFixed(2)} ${p.y.toFixed(2)}`);
+    const right = points.slice().reverse().map(p => `${(p.x + p.halfW).toFixed(2)} ${p.y.toFixed(2)}`);
+    const d = `M ${left.join(' L ')} L ${right.join(' L ')} Z`;
+
+    const stain = pickStain();
+    const capX = points[0].x + stain.offX;
+    const capY = points[0].y + stain.offY;
+    const capR = points[0].halfW * stain.scale;
+    return {
+      d,
+      capX, capY, capR,
+      capBlob: stain.irregular ? jitteredBlob(capX, capY, capR) : null
+    };
+  }
+
+  function strokeSvg(s, animate) {
+    const cls = animate ? ' animate' : '';
+    const cap = s.capBlob
+      ? `<path d="${s.capBlob}"></path>`
+      : `<circle cx="${s.capX.toFixed(2)}" cy="${s.capY.toFixed(2)}" r="${s.capR.toFixed(2)}"></circle>`;
+    return `<g class="stroke${cls}">
+        ${cap}
+        <path d="${s.d}"></path>
+      </g>`;
+  }
+
+  function marksSvg(lines, animateLast) {
+    let inner = '';
+    lines.forEach((line, idx) => {
+      const animate = animateLast && idx === lines.length - 1;
+      inner += strokeSvg(line, animate);
+    });
+    return `<svg class="marks" viewBox="0 0 40 40">${inner}</svg>`;
+  }
+
+  // ---------- calendar rendering ----------
+  const track = document.getElementById('carouselTrack');
+  const WEEKDAY_LABELS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+  function panelHtml(y, m) {
+    const cells = buildCells(y, m);
+    let cellsHtml = '';
+    cells.forEach((c, i) => {
+      const col = i % 7;
+      const weekend = col === 5 || col === 6;
+      let classes = 'cell';
+      if (c.out) classes += ' out';
+      if (weekend) classes += ' weekend';
+      if (!c.out && c.future) classes += ' future';
+      if (!c.out && c.isToday) classes += ' today';
+
+      let mark = '';
+      if (!c.out) {
+        const dayLines = entries[c.key];
+        if (dayLines && dayLines.length) {
+          let renderLines = dayLines;
+          let animateLast = false;
+          if (c.key === revealPendingKey) {
+            renderLines = dayLines.slice(0, -1);
+          } else if (c.key === justCompletedKey) {
+            animateLast = true;
+          }
+          if (renderLines.length) {
+            mark = marksSvg(renderLines, animateLast);
+          }
+        }
+      }
+      cellsHtml += `<div class="${classes}"><span class="num">${c.day}</span>${mark}</div>`;
+    });
+    const weekdaysHtml = WEEKDAY_LABELS.map(w => `<span>${w}</span>`).join('');
+    return `<div class="panel-title">${monthNames()[m]} ${y}</div><div class="panel-weekdays">${weekdaysHtml}</div><div class="panel-grid">${cellsHtml}</div>`;
+  }
+
+  function buildTrack() {
+    const prevM = viewMonth === 0 ? 11 : viewMonth - 1;
+    const prevY = viewMonth === 0 ? viewYear - 1 : viewYear;
+    const nextM = viewMonth === 11 ? 0 : viewMonth + 1;
+    const nextY = viewMonth === 11 ? viewYear + 1 : viewYear;
+
+    track.innerHTML = `
+      <div class="panel">${panelHtml(prevY, prevM)}</div>
+      <div class="panel">${panelHtml(viewYear, viewMonth)}</div>
+      <div class="panel">${panelHtml(nextY, nextM)}</div>
+    `;
+    justCompletedKey = null;
+  }
+
+  function goMonth(dir) {
+    viewMonth += dir;
+    if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+    if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+    buildTrack();
+  }
+
+  // ---------- swipe / drag ----------
+  const viewport = document.getElementById('carouselViewport');
+  let dragging = false, startX = 0, currentDX = 0, viewportW = 0;
+
+  function setTrackX(px, animate) {
+    track.classList.toggle('animating', animate);
+    track.style.transform = `translateX(calc(-33.3333% + ${px}px))`;
+  }
+
+  function dragStart(x) {
+    dragging = true;
+    startX = x;
+    currentDX = 0;
+    viewportW = viewport.clientWidth;
+    track.classList.remove('animating');
+  }
+  function dragMove(x) {
+    if (!dragging) return;
+    currentDX = x - startX;
+    setTrackX(currentDX, false);
+  }
+  function dragEnd() {
+    if (!dragging) return;
+    dragging = false;
+    const threshold = Math.max(40, viewportW * 0.15);
+    if (currentDX <= -threshold) {
+      setTrackX(-viewportW, true);
+      track.addEventListener('transitionend', function handler() {
+        track.removeEventListener('transitionend', handler);
+        track.classList.remove('animating');
+        setTrackX(0, false);
+        goMonth(1);
+      });
+    } else if (currentDX >= threshold) {
+      setTrackX(viewportW, true);
+      track.addEventListener('transitionend', function handler() {
+        track.removeEventListener('transitionend', handler);
+        track.classList.remove('animating');
+        setTrackX(0, false);
+        goMonth(-1);
+      });
+    } else {
+      setTrackX(0, true);
+    }
+  }
+
+  viewport.addEventListener('touchstart', e => dragStart(e.touches[0].clientX), { passive: true });
+  viewport.addEventListener('touchmove', e => dragMove(e.touches[0].clientX), { passive: true });
+  viewport.addEventListener('touchend', dragEnd);
+
+  viewport.addEventListener('mousedown', e => { dragStart(e.clientX); e.preventDefault(); });
+  window.addEventListener('mousemove', e => { if (dragging) dragMove(e.clientX); });
+  window.addEventListener('mouseup', dragEnd);
+
+  // ---------- screens ----------
+  const homeEl = document.getElementById('home');
+  const timerEl = document.getElementById('timer');
+  const wordmarkTap = document.getElementById('wordmarkTap');
+
+  function showScreen(name) {
+    homeEl.style.opacity = name === 'home' ? '1' : '0';
+    homeEl.style.pointerEvents = name === 'home' ? 'auto' : 'none';
+    if (name !== 'timer') {
+      timerEl.classList.remove('active');
+      timerEl.classList.remove('completing');
+    }
+  }
+
+  wordmarkTap.addEventListener('click', () => {
+    startSession(10);
+  });
+
+  // ---------- timer ----------
+  let timerInterval = null;
+  let totalSeconds = 0;
+  let remaining = 0;
+  const readoutEl = document.getElementById('timerReadout');
+  const ringEl = document.getElementById('progressRing');
+  const RING_CIRC = 2 * Math.PI * 47;
+  ringEl.style.strokeDasharray = `${RING_CIRC}`;
+  ringEl.style.strokeDashoffset = `${RING_CIRC}`;
+
+  function formatTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+  }
+
+  function startSession(minutes) {
+    totalSeconds = minutes * 60;
+    remaining = totalSeconds;
+    readoutEl.textContent = formatTime(remaining);
+    ringEl.style.transition = 'none';
+    ringEl.style.strokeDashoffset = `${RING_CIRC}`;
+    void ringEl.offsetWidth;
+    ringEl.style.transition = 'stroke-dashoffset 1s linear';
+
+    homeEl.style.opacity = '0';
+    homeEl.style.pointerEvents = 'none';
+    timerEl.classList.remove('completing');
+    timerEl.classList.add('active');
+
+    // let the screen fade in fully and sit for a beat before the countdown starts
+    setTimeout(beginCountdown, 1900);
+  }
+
+  function beginCountdown() {
+    timerInterval = setInterval(() => {
+      remaining--;
+      readoutEl.textContent = formatTime(remaining);
+      const frac = 1 - remaining / totalSeconds;
+      ringEl.style.strokeDashoffset = `${RING_CIRC * (1 - frac)}`;
+      if (remaining <= 0) {
+        clearInterval(timerInterval);
+        completeSession();
+      }
+    }, 1000);
+  }
+
+  function exitTimer() {
+    if (!timerInterval) return;
+    clearInterval(timerInterval);
+    timerInterval = null;
+    timerEl.classList.remove('active');
+    showScreen('home');
+  }
+  timerEl.addEventListener('click', exitTimer);
+
+  async function completeSession() {
+    playGong();
+    timerEl.classList.add('completing');
+
+    const key = dateKey(today.getFullYear(), today.getMonth(), today.getDate());
+    if (!entries[key]) entries[key] = [];
+    const newRowIndex = entries[key].length;
+    entries[key].push(randomLineParams(newRowIndex));
+    await saveEntries();
+
+    setTimeout(() => {
+      timerEl.classList.remove('active');
+      timerEl.classList.remove('completing');
+      viewYear = today.getFullYear();
+      viewMonth = today.getMonth();
+      justCompletedKey = null;
+      revealPendingKey = key; // hide the just-added line for now
+      buildTrack();
+      showScreen('home');
+
+      // let the home screen settle, then draw the new line in
+      setTimeout(() => {
+        revealPendingKey = null;
+        justCompletedKey = key;
+        buildTrack();
+      }, 1300);
+    }, 1700);
+  }
+
+  function playGong() {
+    try {
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      const ctx = audioCtx;
+      const now = ctx.currentTime;
+      const master = ctx.createGain();
+      master.gain.setValueAtTime(0.0001, now);
+      master.gain.exponentialRampToValueAtTime(0.22, now + 0.06);
+      master.gain.exponentialRampToValueAtTime(0.0001, now + 4.2);
+      master.connect(ctx.destination);
+
+      const partials = [1, 2.41, 3.86, 5.15];
+      partials.forEach((ratio, i) => {
+        const osc = ctx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.value = 196 * ratio;
+        const g = ctx.createGain();
+        g.gain.value = 1 / (i + 1.6);
+        osc.connect(g);
+        g.connect(master);
+        osc.start(now);
+        osc.stop(now + 4.3);
+      });
+    } catch (e) { /* audio unavailable, fail silently */ }
+  }
+
+  // ---------- init ----------
+  (async function init() {
+    await loadEntries();
+    buildTrack();
+    showScreen('home');
+  })();
+})();
+</script>
+
+</body>
+</html>
